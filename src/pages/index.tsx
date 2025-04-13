@@ -1,7 +1,7 @@
 import { ConnectButton } from "@rainbow-me/rainbowkit";
 import type { NextPage } from "next";
 import { useState } from "react";
-import { useSendTransaction, useWriteContract } from "wagmi";
+import { useSendTransaction, useWriteContract, useReadContract } from "wagmi";
 import { parseEther } from "viem";
 import { GTA_ABI } from "../abi/gta";
 
@@ -12,6 +12,14 @@ const Home: NextPage = () => {
   const [mintRecipient, setMintRecipient] = useState("");
   const [tokenUri, setTokenUri] = useState("");
   const { data: hashWrite, writeContract } = useWriteContract();
+  const [tokenID, setTokenID] = useState(0);
+
+  const { data: tokenURI } = useReadContract({
+    address: "0xeb4Dc796747715b573710B39A28a48a319526855",
+    abi: GTA_ABI,
+    functionName: "tokenURI",
+    args: [tokenID],
+  });
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setValue(parseFloat(event.target.value));
