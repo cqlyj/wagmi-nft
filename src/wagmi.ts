@@ -8,6 +8,6 @@ export const config = getDefaultConfig({
   chains: [sepolia],
   ssr: true,
   transports: {
-    [sepolia.id]: http(process.env.SEPOLIA_RPC_URL),
+    [sepolia.id]: http(process.env.NEXT_PUBLIC_SEPOLIA_RPC_URL),
   },
 });
